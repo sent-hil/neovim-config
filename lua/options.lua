@@ -17,7 +17,7 @@ local g = vim.g
 local s = vim.s
 local indent = 4
 
-g.mapleader = " "
+g.mapleader = ","
 
 cmd([[
 	filetype plugin indent on
@@ -53,24 +53,24 @@ opt.lazyredraw = true -- don"t update the display while executing macros
 opt.list = true
 -- You can also add "space" or "eol", but I feel it"s quite annoying
 opt.listchars = {
-    tab = "┊ ",
-    trail = "·",
-    extends = "»",
-    precedes = "«",
-    nbsp = "×"
+  tab = "┊ ",
+  trail = "·",
+  extends = "»",
+  precedes = "«",
+  nbsp = "×"
 }
 
 -- Hide cmd line
 opt.cmdheight = 0      -- more space in the neovim command line for displaying messages
 
 opt.mouse = "a"        -- allow the mouse to be used in neovim
-opt.number = true      -- set numbered lines
+opt.relativenumber = true  -- set relative numbered lines
 opt.scrolloff = 18     -- minimal number of screen lines to keep above and below the cursor
 opt.sidescrolloff = 3  -- minimal number of screen columns to keep to the left and right (horizontal) of the cursor if wrap is `false`
 opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
 opt.splitbelow = true  -- open new split below
 opt.splitright = true  -- open new split to the right
-opt.wrap = false       -- display a long line
+opt.wrap       = false -- display a long line
 
 -- backups
 opt.backup = false      -- create a backup file
@@ -80,7 +80,7 @@ opt.writebackup = false -- if a file is being edited by another program (or was 
 -- autocomplete
 opt.completeopt = { "menu", "menuone", "noselect" } -- mostly just for cmp
 opt.shortmess = opt.shortmess + {
-    c = true
+  c = true
 } -- hide all the completion messages, e.g. "-- XXX completion (YYY)", "match 1 of 2", "The only match", "Pattern not found"
 
 -- By the way, -- INSERT -- is unnecessary anymore because the mode information is displayed in the statusline.
@@ -111,16 +111,12 @@ opt.foldlevel = 99
 
 -- Disable builtin plugins
 local disabled_built_ins = {
-    "2html_plugin", "getscript", "getscriptPlugin", "gzip", "logipat", "netrw", "netrwPlugin",
-    "netrwSettings", "netrwFileHandlers", "matchit", "tar", "tarPlugin", "rrhelper",
-    "spellfile_plugin", "vimball", "vimballPlugin", "zip", "zipPlugin", "tutor", "rplugin",
-    "synmenu", "optwin", "compiler", "bugreport", "ftplugin"
+  "2html_plugin", "getscript", "getscriptPlugin", "gzip", "logipat", "netrw", "netrwPlugin",
+  "netrwSettings", "netrwFileHandlers", "matchit", "tar", "tarPlugin", "rrhelper",
+  "spellfile_plugin", "vimball", "vimballPlugin", "zip", "zipPlugin", "tutor", "rplugin",
+  "synmenu", "optwin", "compiler", "bugreport", "ftplugin"
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-    g["loaded_" .. plugin] = 1
+  g["loaded_" .. plugin] = 1
 end
-
--- Colorscheme
--- By default, use rose-pine
-cmd.colorscheme("rose-pine")

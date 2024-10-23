@@ -63,3 +63,9 @@ autocmd("Filetype", {
         vim.opt_local.spell = true
     end
 })
+
+autocmd('BufWinEnter', {
+  desc = 'return cursor to where it was last time closing the file',
+  pattern = '*',
+  command = 'silent! normal! g`"zv',
+})
