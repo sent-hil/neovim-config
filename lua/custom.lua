@@ -16,68 +16,43 @@ M.plugins = {
     end,
   },
   { 'akinsho/toggleterm.nvim', version = "*", config = true },
-    {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    lazy = false,
-    version = false, -- set this if you want to always pull the latest change
+  -- colorscheme for lualine
+  {
+    -- Rose-pine - Soho vibes for Neovim
+    "rose-pine/neovim",
+    name = "rose-pine",
     opts = {
-      -- add any opts here
-    },
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
-    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      --- The below dependencies are optional,
-      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua",      -- for providers='copilot'
-      {
-        -- support for image pasting
-        "HakonHarnes/img-clip.nvim",
-        event = "VeryLazy",
-        opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-            -- required for Windows users
-            use_absolute_path = true,
-          },
-        },
-      },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-      },
-    },
-    {
-      "robitx/gp.nvim",
-      config = function()
-        local conf = {
-          openai_api_key = os.getenv("OPENAI_API_KEY"),
-
-          providers = {
-            openai = {
-              endpoint = "https://api.openai.com/v1/chat/completions",
-              secret = os.getenv("OPENAI_API_KEY"),
-            }
-          },
-        }
-
-        require("gp").setup(conf)
-      end,
+      dark_variant = "main"
     }
+  },
+  -- -- Statusline
+  -- -- A blazing fast and easy to configure neovim statusline plugin written in pure lua.
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = function()
+      require("plugins.configs.lualine")
+    end
+  },
+  {
+    'justinmk/vim-sneak'
+  },
+  -- {
+  --   "Pocco81/auto-save.nvim",
+  --   config = function()
+  --     require("auto-save").setup {
+  --       trigger_events = {"InsertLeave"},
+  --       debounce_delay = 500
+  --     }
+  --   end,
+  -- }
+  {
+    "willothy/nvim-cokeline",
+    dependencies = {
+      "nvim-lua/plenary.nvim",       -- Required for v0.4.0+
+      "nvim-tree/nvim-web-devicons", -- If you want devicons
+      "stevearc/resession.nvim"      -- Optional, for persistent history
+    },
+    config = true,
   },
   {
     "yetone/avante.nvim",
@@ -124,77 +99,7 @@ M.plugins = {
         ft = { "markdown", "Avante" },
       },
     },
-  },
-  {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      require('lualine').setup({
-        options = {
-          theme = 'ayu',
-        }
-      })
-    end
-  },
-  {
-    'justinmk/vim-sneak'
-  },
-  {
-    "willothy/nvim-cokeline",
-    dependencies = {
-      "nvim-lua/plenary.nvim",       -- Required for v0.4.0+
-      "nvim-tree/nvim-web-devicons", -- If you want devicons
-      "stevearc/resession.nvim"      -- Optional, for persistent history
-    },
-    lazy = false,
-    config = function()
-      local get_hex = require('cokeline.hlgroups').get_hl_attr
-
-      require('cokeline').setup({
-        default_hl = {
-          fg = function(buffer)
-            return
-                buffer.is_focused
-                and get_hex('ColorColumn', 'bg')
-                or get_hex('Normal', 'fg')
-          end,
-          bg = function(buffer)
-            return
-                buffer.is_focused
-                and get_hex('Normal', 'fg')
-                or get_hex('ColorColumn', 'bg')
-          end,
-        },
-
-        components = {
-          {
-            text = function(buffer) return ' ' .. buffer.devicon.icon end,
-            fg = function(buffer) return buffer.devicon.color end,
-          },
-          {
-            text = function(buffer) return buffer.unique_prefix end,
-            fg = get_hex('Comment', 'fg'),
-            italic = true
-          },
-          {
-            text = function(buffer) return buffer.filename .. ' ' end,
-            underline = function(buffer)
-              return buffer.is_hovered and not buffer.is_focused
-            end
-          },
-          {
-            text = '',
-            on_click = function(_, _, _, _, buffer)
-              buffer:delete()
-            end
-          },
-          {
-            text = ' ',
-          }
-        },
-      })
-    end,
-  },
+  }
 }
 
 -- add extra configuration options here, like extra autocmds etc.

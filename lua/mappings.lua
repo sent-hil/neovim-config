@@ -39,6 +39,7 @@ local builtin = require "telescope.builtin"
 map("n", "<leader>p", builtin.find_files, { desc = "Open Telescope to find files" })
 map("n", "<leader>f", builtin.live_grep, { desc = "Open Telescope to do live grep" })
 map("n", "<leader>b", builtin.buffers, { desc = "Open Telescope to list buffers" })
+map("n", "<leader>m", builtin.marks, { desc = "Open Telescope to list buffers" })
 --map("n", "<leader>fh", builtin.help_tags, { desc = "Open Telescope to show help" })
 --map("n", "<leader>fo", builtin.oldfiles, { desc = "Open Telescope to list recent files" })
 map("n", "<leader>cm", builtin.git_commits, { desc = "Open Telescope to list git commits" })

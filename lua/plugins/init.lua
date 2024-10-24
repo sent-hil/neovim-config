@@ -32,7 +32,7 @@ local builtin_plugins = {
       formatters_by_ft = { lua = { "stylua" } },
     },
   },
-    -- Git integration for buffers
+  -- Git integration for buffers
   {
     "lewis6991/gitsigns.nvim",
     event = "User FilePost",
@@ -71,20 +71,6 @@ local builtin_plugins = {
       require("telescope").load_extension("fzf")
       require("plugins.configs.telescope")
     end
-  },
-  -- colorscheme
-  {
-    'maxmx03/solarized.nvim',
-    lazy = false,
-    priority = 1000,
-    ---@type solarized.config
-    opts = {},
-    config = function(_, opts)
-      vim.o.termguicolors = true
-      vim.o.background = 'dark'
-      require('solarized').setup(opts)
-      vim.cmd.colorscheme 'solarized'
-    end,
   },
   -- LSP stuffs
   -- Portable package manager for Neovim that runs everywhere Neovim runs.
@@ -198,7 +184,7 @@ local builtin_plugins = {
     opts = {
       -- options
     },
-  }
+  },
 }
 
 local exist, custom = pcall(require, "custom")
