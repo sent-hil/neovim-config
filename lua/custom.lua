@@ -3,38 +3,36 @@ local M = {}
 -- add extra plugins here
 M.plugins = {
   {
-    'Shatur/neovim-ayu',
+    "Shatur/neovim-ayu",
     lazy = false,
     priority = 1000,
     opts = {},
     config = function(_, opts)
-      require('ayu').setup({
-        mirage = true,   -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
+      require("ayu").setup {
+        mirage = true, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
         terminal = true, -- Set to `false` to let terminal manage its own colors.
-        overrides = {},  -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
-      })
+        overrides = {}, -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
+      }
     end,
   },
-  { 'akinsho/toggleterm.nvim', version = "*", config = true },
+  { "akinsho/toggleterm.nvim", version = "*", config = true },
   -- colorscheme for lualine
   {
     -- Rose-pine - Soho vibes for Neovim
     "rose-pine/neovim",
     name = "rose-pine",
     opts = {
-      dark_variant = "main"
-    }
+      dark_variant = "main",
+    },
   },
   -- -- Statusline
   -- -- A blazing fast and easy to configure neovim statusline plugin written in pure lua.
   {
     "nvim-lualine/lualine.nvim",
-    opts = function()
-      require("plugins.configs.lualine")
-    end
+    opts = function() require "plugins.configs.lualine" end,
   },
   {
-    'justinmk/vim-sneak'
+    "justinmk/vim-sneak",
   },
   -- {
   --   "Pocco81/auto-save.nvim",
@@ -48,9 +46,9 @@ M.plugins = {
   {
     "willothy/nvim-cokeline",
     dependencies = {
-      "nvim-lua/plenary.nvim",       -- Required for v0.4.0+
+      "nvim-lua/plenary.nvim", -- Required for v0.4.0+
       "nvim-tree/nvim-web-devicons", -- If you want devicons
-      "stevearc/resession.nvim"      -- Optional, for persistent history
+      "stevearc/resession.nvim", -- Optional, for persistent history
     },
     config = true,
   },
@@ -92,21 +90,21 @@ M.plugins = {
       },
       {
         -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
+        "MeanderingProgrammer/render-markdown.nvim",
         opts = {
           file_types = { "markdown", "Avante" },
         },
         ft = { "markdown", "Avante" },
       },
     },
-  }
+  },
 }
 
 -- add extra configuration options here, like extra autocmds etc.
 -- feel free to create your own separate files and require them in here
 M.configs = function()
   require("ayu").colorscheme()
-  require("toggleterm").setup({
+  require("toggleterm").setup {
     -- size can be a number or function which is passed the current terminal
     size = function(term)
       if term.direction == "horizontal" then
@@ -119,8 +117,8 @@ M.configs = function()
     end,
     open_mapping = [[<c-\>]],
     direction = "vertical",
-    shade_terminals = false
-  })
+    shade_terminals = false,
+  }
 end
 -- add servers to be used for auto formatting here
 M.formatting_servers = {
@@ -137,10 +135,10 @@ M.setup_sources = function(b)
     b.formatting.autopep8,
     b.formatting.prettier.with {
       extra_filetypes = { "toml" },
-      extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" }
+      extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
     },
     b.formatting.black.with {
-      extra_args = { "--fast" }
+      extra_args = { "--fast" },
     },
     b.formatting.stylua,
   }

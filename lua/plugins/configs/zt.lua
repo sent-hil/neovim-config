@@ -1,5 +1,5 @@
 local function scrolloff_should_reenable()
-  if vim.w.orig_scrolloff == nil then return false end                -- Nothing to do.
+  if vim.w.orig_scrolloff == nil then return false end -- Nothing to do.
   if vim.fn.winheight(0) <= vim.w.orig_scrolloff then return true end -- Too small for override.
   return vim.w.orig_scrolloff < vim.fn.winline() and vim.fn.winline() < vim.fn.winheight(0) - vim.w.orig_scrolloff
 end
@@ -25,7 +25,7 @@ local function scrolloff_disable()
 end
 
 local function scroll_very_bottom()
-  local current_line = vim.fn.line('.')
+  local current_line = vim.fn.line "."
   scrolloff_disable()
   -- Move one line up to see the line above cursor
   vim.cmd(string.format(":norm! %dGzb", current_line - 4))
@@ -34,7 +34,7 @@ local function scroll_very_bottom()
 end
 
 local function scroll_very_top()
-  local current_line = vim.fn.line('.')
+  local current_line = vim.fn.line "."
   scrolloff_disable()
   -- Move one line up to position with zt
   vim.cmd(string.format(":norm! %dGzt", current_line - 3))

@@ -18,11 +18,9 @@ local builtin_plugins = {
     "nvim-tree/nvim-tree.lua",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      opt = true
+      opt = true,
     },
-    opts = function()
-      require("plugins.configs.tree")
-    end,
+    opts = function() require "plugins.configs.tree" end,
   },
   -- Formatter
   -- Lightweight yet powerful formatter plugin for Neovim
@@ -36,9 +34,7 @@ local builtin_plugins = {
   {
     "lewis6991/gitsigns.nvim",
     event = "User FilePost",
-    opts = function()
-      require("plugins.configs.gitsigns")
-    end,
+    opts = function() require "plugins.configs.gitsigns" end,
   },
   -- Treesitter interface
   {
@@ -47,9 +43,7 @@ local builtin_plugins = {
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
-    opts = function()
-      require("plugins.configs.treesitter")
-    end,
+    opts = function() require "plugins.configs.treesitter" end,
   },
   -- Telescope
   -- Find, Filter, Preview, Pick. All lua, all the time.
@@ -60,17 +54,17 @@ local builtin_plugins = {
       "nvim-treesitter/nvim-treesitter",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make"
-      }
+        build = "make",
+      },
     },
     cmd = "Telescope",
     config = function(_)
       require("telescope").setup()
       -- To get fzf loaded and working with telescope, you need to call
       -- load_extension, somewhere after setup function:
-      require("telescope").load_extension("fzf")
-      require("plugins.configs.telescope")
-    end
+      require("telescope").load_extension "fzf"
+      require "plugins.configs.telescope"
+    end,
   },
   -- LSP stuffs
   -- Portable package manager for Neovim that runs everywhere Neovim runs.
@@ -78,28 +72,22 @@ local builtin_plugins = {
   {
     "williamboman/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
-    config = function()
-      require("plugins.configs.mason")
-    end
+    config = function() require "plugins.configs.mason" end,
   },
   {
-    "williamboman/mason-lspconfig.nvim"
+    "williamboman/mason-lspconfig.nvim",
   },
   {
     "nvimtools/none-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = { "nvimtools/none-ls-extras.nvim" },
     lazy = false,
-    config = function()
-      require("plugins.configs.null-ls")
-    end
+    config = function() require "plugins.configs.null-ls" end,
   },
   {
     "neovim/nvim-lspconfig",
     event = "User FilePost",
-    config = function()
-      require("plugins.configs.lspconfig")
-    end,
+    config = function() require "plugins.configs.lspconfig" end,
   },
   {
     "hrsh7th/nvim-cmp",
@@ -112,7 +100,7 @@ local builtin_plugins = {
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, opts)
           require("luasnip").config.set_config(opts)
-          require("plugins.configs.luasnip")
+          require "plugins.configs.luasnip"
         end,
       },
 
@@ -129,9 +117,7 @@ local builtin_plugins = {
         "onsails/lspkind.nvim",
       },
     },
-    opts = function()
-      require("plugins.configs.cmp")
-    end,
+    opts = function() require "plugins.configs.cmp" end,
   },
   -- Colorizer
   {
@@ -140,10 +126,8 @@ local builtin_plugins = {
       require("colorizer").setup()
 
       -- execute colorizer as soon as possible
-      vim.defer_fn(function()
-        require("colorizer").attach_to_buffer(0)
-      end, 0)
-    end
+      vim.defer_fn(function() require("colorizer").attach_to_buffer(0) end, 0)
+    end,
   },
   -- Keymappings
   {
@@ -151,7 +135,7 @@ local builtin_plugins = {
     event = "VeryLazy",
     config = function()
       require("which-key").setup {
-        delay = 1000 -- how long to wait before showing description
+        delay = 1000, -- how long to wait before showing description
       }
     end,
   },
@@ -159,8 +143,7 @@ local builtin_plugins = {
     "hedyhli/outline.nvim",
     config = function()
       -- Example mapping to toggle outline
-      vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>",
-        { desc = "Toggle Outline" })
+      vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
 
       require("outline").setup()
     end,
@@ -172,12 +155,10 @@ local builtin_plugins = {
       "neovim/nvim-lspconfig",
       "nvim-treesitter/nvim-treesitter",
     },
-    config = function()
-      require("go").setup()
-    end,
+    config = function() require("go").setup() end,
     event = { "CmdlineEnter" },
-    ft = { "go", 'gomod' },
-    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+    ft = { "go", "gomod" },
+    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
   {
     "j-hui/fidget.nvim",
@@ -192,12 +173,12 @@ local custom_plugins = exist and type(custom) == "table" and custom.plugins or {
 
 -- Check if there is any custom plugins
 -- local ok, custom_plugins = pcall(require, "plugins.custom")
-require("lazy").setup({
+require("lazy").setup {
   spec = { builtin_plugins, custom_plugins },
-  lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile generated after running update.
+  lockfile = vim.fn.stdpath "config" .. "/lazy-lock.json", -- lockfile generated after running update.
   defaults = {
-    lazy = false,                                           -- should plugins be lazy-loaded?
-    version = nil
+    lazy = false, -- should plugins be lazy-loaded?
+    version = nil,
     -- version = "*", -- enable this to try installing the latest stable versions of plugins
   },
   ui = {
@@ -205,14 +186,14 @@ require("lazy").setup({
       ft = "",
       lazy = "󰂠",
       loaded = "",
-      not_loaded = ""
-    }
+      not_loaded = "",
+    },
   },
   install = {
     -- install missing plugins on startup
     missing = true,
     -- try to load one of these colorschemes when starting an installation during startup
-    colorscheme = { "rose-pine", "habamax" }
+    colorscheme = { "rose-pine", "habamax" },
   },
   checker = {
     -- automatically check for plugin updates
@@ -221,36 +202,34 @@ require("lazy").setup({
     -- disable it as it's too annoying
     notify = false,
     -- check for updates every day
-    frequency = 86400
+    frequency = 86400,
   },
   change_detection = {
     -- automatically check for config file changes and reload the ui
     enabled = true,
     -- get a notification when changes are found
     -- disable it as it's too annoying
-    notify = false
+    notify = false,
   },
   performance = {
     cache = {
-      enabled = true
-    }
+      enabled = true,
+    },
   },
-  state = vim.fn.stdpath("state") .. "/lazy/state.json" -- state info for checker and other things
-})
+  state = vim.fn.stdpath "state" .. "/lazy/state.json", -- state info for checker and other things
+}
 
 local aucmd = vim.api.nvim_create_autocmd
 
-local function augroup(name, fnc)
-  fnc(vim.api.nvim_create_augroup(name, { clear = true }))
-end
+local function augroup(name, fnc) fnc(vim.api.nvim_create_augroup(name, { clear = true })) end
 
-vim.api.nvim_create_autocmd('CursorMoved', {
-  group = vim.api.nvim_create_augroup('auto-hlsearch', { clear = true }),
+vim.api.nvim_create_autocmd("CursorMoved", {
+  group = vim.api.nvim_create_augroup("auto-hlsearch", { clear = true }),
   callback = function()
     if vim.v.hlsearch == 1 and vim.fn.searchcount().exact_match == 0 then
       vim.schedule(function() vim.cmd.nohlsearch() end)
     end
-  end
+  end,
 })
 
-require("plugins.configs.zt")
+require "plugins.configs.zt"

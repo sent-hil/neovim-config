@@ -65,11 +65,11 @@ map("v", "mm", "gc", { desc = "Toggle comment", remap = true })
 
 map("n", "<leader>o", ":Outline<CR>", { desc = "Toggle Outline" }) -- open/close
 
-map('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
+map("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 
 -- GPTModelsCode
-vim.api.nvim_set_keymap('v', '<leader>a', ':GPChatToggle<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>a', ':GPChatToggle<CR>', { noremap = true })
+vim.api.nvim_set_keymap("v", "<leader>a", ":GPChatToggle<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>a", ":GPChatToggle<CR>", { noremap = true })
 
 --vim.api.nvim_set_keymap('v', '<leader>c', ':GPTModelsChat<CR>', { noremap = true })
 --vim.api.nvim_set_keymap('n', '<leader>c', ':GPTModelsChat<CR>', { noremap = true })
@@ -79,12 +79,7 @@ map("n", "<S-Tab>", "<Plug>(cokeline-focus-prev)", { silent = true })
 map("n", "<Tab>", "<Plug>(cokeline-focus-next)", { silent = true })
 
 for i = 1, 9 do
-  map(
-    "n",
-    ("<Leader>%s"):format(i),
-    ("<Plug>(cokeline-focus-%s)"):format(i),
-    { silent = true }
-  )
+  map("n", ("<Leader>%s"):format(i), ("<Plug>(cokeline-focus-%s)"):format(i), { silent = true })
 end
 
 -- Navigate softwrapped lines like regular lines
