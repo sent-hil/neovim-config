@@ -28,7 +28,7 @@ local function scroll_very_bottom()
   local current_line = vim.fn.line "."
   scrolloff_disable()
   -- Move one line up to see the line above cursor
-  vim.cmd(string.format(":norm! %dGzb", current_line - 4))
+  vim.cmd(string.format(":norm! %dGzb", current_line + 3))
   -- Move back to original line
   vim.cmd(string.format(":norm! %dG", current_line))
 end

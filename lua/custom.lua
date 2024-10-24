@@ -2,93 +2,33 @@ local M = {}
 
 -- add extra plugins here
 M.plugins = {
+  require("plugins.ayu"),
+  require("plugins.lualine"),
+  require("plugins.avante"),
   {
-    "Shatur/neovim-ayu",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-    config = function(_, opts)
-      require("ayu").setup {
-        mirage = true, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
-        terminal = true, -- Set to `false` to let terminal manage its own colors.
-        overrides = {}, -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
-      }
-    end,
+    "willothy/nvim-cokeline",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "stevearc/resession.nvim",
+    },
+    config = true,
   },
-  { "akinsho/toggleterm.nvim", version = "*", config = true },
-  -- colorscheme for lualine
   {
-    -- Rose-pine - Soho vibes for Neovim
     "rose-pine/neovim",
     name = "rose-pine",
     opts = {
       dark_variant = "main",
     },
   },
-  -- -- Statusline
-  -- -- A blazing fast and easy to configure neovim statusline plugin written in pure lua.
-  {
-    "nvim-lualine/lualine.nvim",
-    opts = function() require "plugins.configs.lualine" end,
-  },
   {
     "justinmk/vim-sneak",
   },
   {
-    "willothy/nvim-cokeline",
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- Required for v0.4.0+
-      "nvim-tree/nvim-web-devicons", -- If you want devicons
-      "stevearc/resession.nvim", -- Optional, for persistent history
-    },
-    config = true,
-  },
-  {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    lazy = false,
-    version = false, -- set this if you want to always pull the latest change
-    opts = {
-      -- add any opts here
-    },
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
-    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      --- The below dependencies are optional,
-      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua", -- for providers='copilot'
-      {
-        -- support for image pasting
-        "HakonHarnes/img-clip.nvim",
-        event = "VeryLazy",
-        opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-            -- required for Windows users
-            use_absolute_path = true,
-          },
-        },
-      },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        "MeanderingProgrammer/render-markdown.nvim",
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-      },
-    },
-  },
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = true
+  }
 }
 
 -- add extra configuration options here, like extra autocmds etc.

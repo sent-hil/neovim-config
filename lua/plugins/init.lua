@@ -177,7 +177,7 @@ require("lazy").setup {
   spec = { builtin_plugins, custom_plugins },
   lockfile = vim.fn.stdpath "config" .. "/lazy-lock.json", -- lockfile generated after running update.
   defaults = {
-    lazy = false, -- should plugins be lazy-loaded?
+    lazy = false,                                          -- should plugins be lazy-loaded?
     version = nil,
     -- version = "*", -- enable this to try installing the latest stable versions of plugins
   },
@@ -232,4 +232,4 @@ vim.api.nvim_create_autocmd("CursorMoved", {
   end,
 })
 
-require "plugins.configs.zt"
+require "plugins.zt"
