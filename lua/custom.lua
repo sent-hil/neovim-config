@@ -2,9 +2,9 @@ local M = {}
 
 -- add extra plugins here
 M.plugins = {
-  require("plugins.ayu"),
-  require("plugins.lualine"),
-  require("plugins.avante"),
+  require "plugins.ayu",
+  require "plugins.lualine",
+  require "plugins.avante",
   {
     "willothy/nvim-cokeline",
     dependencies = {
@@ -27,7 +27,21 @@ M.plugins = {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
-    config = true
+    config = true,
+  },
+  {
+    "rachartier/tiny-code-action.nvim",
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim" },
+    },
+    event = "LspAttach",
+    config = function() require("tiny-code-action").setup() end,
+  },
+  {
+    "folke/trouble.nvim",
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = "Trouble",
   }
 }
 
@@ -50,6 +64,14 @@ M.configs = function()
     direction = "vertical",
     shade_terminals = false,
   }
+  require("render-markdown").setup {
+    code = {
+      enabled = true,
+      sign = false,
+      style = "normal",
+    },
+  }
+  require "functions"
 end
 -- add servers to be used for auto formatting here
 M.formatting_servers = {

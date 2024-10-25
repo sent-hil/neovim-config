@@ -3,7 +3,12 @@ return {
   event = "VeryLazy",
   lazy = false,
   version = false,
-  opts = {},
+  opts = {
+    windows = {
+      wrap = true,
+      position = "left",
+    },
+  },
   build = "make",
   dependencies = {
     "nvim-treesitter/nvim-treesitter",

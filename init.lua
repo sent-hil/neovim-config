@@ -48,5 +48,3 @@ end
 -- Load custom configurations
 local exist, custom = pcall(require, "custom")
 if exist and type(custom) == "table" and custom.configs then custom.configs() end
-
-vim.o.cursorline = true

@@ -1,3 +1,4 @@
+-- Map zt, zb to move line under cursor top, bottom of screen
 local function scrolloff_should_reenable()
   if vim.w.orig_scrolloff == nil then return false end -- Nothing to do.
   if vim.fn.winheight(0) <= vim.w.orig_scrolloff then return true end -- Too small for override.

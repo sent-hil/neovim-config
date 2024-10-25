@@ -37,7 +37,9 @@ return {
       wal_colors_file:close()
 
       if not ok then
-        modules.utils_notices.add_notice("lualine.nvim: " .. wal_colors_path .. " could not be read: " .. wal_colors_text)
+        modules.utils_notices.add_notice(
+          "lualine.nvim: " .. wal_colors_path .. " could not be read: " .. wal_colors_text
+        )
         return colors
       end
 
@@ -294,5 +296,5 @@ return {
 
     -- Now don"t forget to initialize lualine
     lualine.setup(config)
-  end
+  end,
 }

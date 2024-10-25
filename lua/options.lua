@@ -47,7 +47,7 @@ opt.wildignore = opt.wildignore + { "*/node_modules/*", "*/.git/*", "*/vendor/*"
 opt.wildmenu = true -- make tab completion for files/buffers act like bash
 
 -- ui
-opt.cursorline = true -- highlight the current line
+opt.cursorline = false -- highlight the current line
 opt.laststatus = 2 -- only the last window will always have a status line
 opt.lazyredraw = true -- don"t update the display while executing macros
 opt.list = true
@@ -65,6 +65,7 @@ opt.cmdheight = 0 -- more space in the neovim command line for displaying messag
 
 opt.mouse = "a" -- allow the mouse to be used in neovim
 opt.number = true -- set numbered lines
+opt.relativenumber = true
 opt.scrolloff = 5 -- minimal number of screen lines to keep above and below the cursor
 opt.sidescrolloff = 3 -- minimal number of screen columns to keep to the left and right (horizontal) of the cursor if wrap is `false`
 opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time

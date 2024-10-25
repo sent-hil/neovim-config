@@ -69,3 +69,18 @@ autocmd("BufWinEnter", {
   pattern = "*",
   command = 'silent! normal! g`"zv',
 })
+
+autocmd("Filetype", {
+  pattern = { "AvanteInput" },
+  callback = function() vim.opt_local.wrap = true end,
+})
+
+local function auto_update_path()
+  local buf = vim.api.nvim_get_current_buf()
+  local bufname = vim.api.nvim_buf_get_name(buf)
+  if vim.fn.isdirectory(bufname) or vim.fn.isfile(bufname) then
+    require("nvim-tree.api").tree.find_file(vim.fn.expand "%:p")
+  end
+end
+
+autocmd("BufEnter", { callback = auto_update_path })
