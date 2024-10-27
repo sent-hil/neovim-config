@@ -6,7 +6,6 @@ return {
   opts = {
     windows = {
       wrap = true,
-      position = "left",
     },
   },
   build = "make",
