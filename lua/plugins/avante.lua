@@ -7,6 +7,9 @@ return {
     windows = {
       wrap = true,
     },
+    hints = {
+      enabled = false,
+    },
   },
   build = "make",
   dependencies = {

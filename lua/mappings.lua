@@ -53,12 +53,18 @@ map(
   builtin.find_files,
   { desc = "Open Telescope to find files" }
 )
+
 map(
   "n",
   "<leader>f",
   builtin.live_grep,
   { desc = "Open Telescope to do live grep" }
 )
+
+local live_grep_args_shortcuts = require "telescope-live-grep-args.shortcuts"
+map("n", "<leader>ff", live_grep_args_shortcuts.grep_word_under_cursor, {
+  desc = "Open Telescope to do live grep for word under cursor",
+})
 
 -- NvimTree
 map(
@@ -116,6 +122,3 @@ vim.keymap.set(
   function() return vim.fn.wildmenumode() == 1 and " <bs><C-Z>" or "<right>" end,
   { expr = true }
 )
-
-local live_grep_args_shortcuts = require "telescope-live-grep-args.shortcuts"
-map("v", "<leader>f", live_grep_args_shortcuts.grep_word_under_cursor)

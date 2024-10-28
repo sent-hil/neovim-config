@@ -111,6 +111,8 @@ opt.undoreload = 10000
 opt.foldmethod = "marker"
 opt.foldlevel = 99
 
+opt.iskeyword = "@,48-57,_,192-255,-"
+
 -- Disable builtin plugins
 local disabled_built_ins = {
   "2html_plugin",
