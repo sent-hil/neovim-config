@@ -56,6 +56,10 @@ local builtin_plugins = {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
       },
+      {
+        "nvim-telescope/telescope-live-grep-args.nvim",
+        version = "^1.0.0",
+      },
     },
     cmd = "Telescope",
     config = function(_)
@@ -63,6 +67,7 @@ local builtin_plugins = {
       -- To get fzf loaded and working with telescope, you need to call
       -- load_extension, somewhere after setup function:
       require("telescope").load_extension "fzf"
+      require("telescope").load_extension "live_grep_args"
       require "plugins.configs.telescope"
     end,
   },

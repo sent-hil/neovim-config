@@ -123,3 +123,6 @@ vim.api.nvim_set_keymap(
   [[<cmd>lua require('telescope.builtin').grep_string()<cr>]],
   { silent = true, noremap = true }
 )
+
+local live_grep_args_shortcuts = require "telescope-live-grep-args.shortcuts"
+map("v", "<leader>f", live_grep_args_shortcuts.grep_word_under_cursor)
