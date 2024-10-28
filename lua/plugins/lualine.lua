@@ -25,20 +25,27 @@ return {
         utils_notices = "lualine.utils.notices",
       }
       local sep = package.config:sub(1, 1)
-      local wal_colors_path = table.concat({ os.getenv "HOME", ".cache", "wal", "colors.sh" }, sep)
+      local wal_colors_path =
+        table.concat({ os.getenv "HOME", ".cache", "wal", "colors.sh" }, sep)
       local wal_colors_file = io.open(wal_colors_path, "r")
 
       if wal_colors_file == nil then
-        modules.utils_notices.add_notice("lualine.nvim: " .. wal_colors_path .. " not found")
+        modules.utils_notices.add_notice(
+          "lualine.nvim: " .. wal_colors_path .. " not found"
+        )
         return colors
       end
 
-      local ok, wal_colors_text = pcall(wal_colors_file.read, wal_colors_file, "*a")
+      local ok, wal_colors_text =
+        pcall(wal_colors_file.read, wal_colors_file, "*a")
       wal_colors_file:close()
 
       if not ok then
         modules.utils_notices.add_notice(
-          "lualine.nvim: " .. wal_colors_path .. " could not be read: " .. wal_colors_text
+          "lualine.nvim: "
+            .. wal_colors_path
+            .. " could not be read: "
+            .. wal_colors_text
         )
         return colors
       end
@@ -74,7 +81,9 @@ return {
     local colors = loadcolors()
 
     local conditions = {
-      buffer_not_empty = function() return vim.fn.empty(vim.fn.expand "%:t") ~= 1 end,
+      buffer_not_empty = function()
+        return vim.fn.empty(vim.fn.expand "%:t") ~= 1
+      end,
       hide_in_width = function() return vim.fn.winwidth(0) > 80 end,
       check_git_workspace = function()
         local filepath = vim.fn.expand "%:p:h"
@@ -130,10 +139,14 @@ return {
     }
 
     -- Inserts a component in lualine_c at left section
-    local function ins_left(component) table.insert(config.sections.lualine_c, component) end
+    local function ins_left(component)
+      table.insert(config.sections.lualine_c, component)
+    end
 
     -- Inserts a component in lualine_x ot right section
-    local function ins_right(component) table.insert(config.sections.lualine_x, component) end
+    local function ins_right(component)
+      table.insert(config.sections.lualine_x, component)
+    end
 
     ins_left {
       -- mode component
@@ -221,7 +234,9 @@ return {
         if next(clients) == nil then return msg end
         for _, client in ipairs(clients) do
           local filetypes = client.config.filetypes
-          if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then return client.name end
+          if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+            return client.name
+          end
         end
         return msg
       end,

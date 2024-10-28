@@ -17,7 +17,10 @@ local diagnostics = null_ls.builtins.diagnostics
 
 -- Load custom configurations
 local exist, custom = pcall(require, "custom")
-local sources = exist and type(custom) == "table" and custom.setup_sources and custom.setup_sources(null_ls.builtins)
+local sources = exist
+    and type(custom) == "table"
+    and custom.setup_sources
+    and custom.setup_sources(null_ls.builtins)
   or {}
 
 null_ls.setup {

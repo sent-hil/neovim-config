@@ -2,7 +2,8 @@
 local function scrolloff_should_reenable()
   if vim.w.orig_scrolloff == nil then return false end -- Nothing to do.
   if vim.fn.winheight(0) <= vim.w.orig_scrolloff then return true end -- Too small for override.
-  return vim.w.orig_scrolloff < vim.fn.winline() and vim.fn.winline() < vim.fn.winheight(0) - vim.w.orig_scrolloff
+  return vim.w.orig_scrolloff < vim.fn.winline()
+    and vim.fn.winline() < vim.fn.winheight(0) - vim.w.orig_scrolloff
 end
 
 local function scrolloff_add_autocmd()

@@ -90,7 +90,15 @@ local options = {
       if cmp.visible() then
         cmp.select_next_item()
       elseif require("luasnip").expand_or_jumpable() then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+        vim.fn.feedkeys(
+          vim.api.nvim_replace_termcodes(
+            "<Plug>luasnip-expand-or-jump",
+            true,
+            true,
+            true
+          ),
+          ""
+        )
       else
         fallback()
       end
@@ -99,7 +107,15 @@ local options = {
       if cmp.visible() then
         cmp.select_prev_item()
       elseif require("luasnip").jumpable(-1) then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+        vim.fn.feedkeys(
+          vim.api.nvim_replace_termcodes(
+            "<Plug>luasnip-jump-prev",
+            true,
+            true,
+            true
+          ),
+          ""
+        )
       else
         fallback()
       end
@@ -114,7 +130,8 @@ local options = {
         -- Avoid accidentally running on big files
         get_bufnrs = function()
           local buf = vim.api.nvim_get_current_buf()
-          local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+          local byte_size =
+            vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
           if byte_size > 1024 * 1024 then -- 1 Megabyte max
             return {}
           end

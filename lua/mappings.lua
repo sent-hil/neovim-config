@@ -31,7 +31,12 @@ map("n", "j", "gj")
 map("n", "q", ":bd<cr>")
 
 -- Reload configuration without restart nvim
-map("n", "<leader>r", ":source $MYVIMRC<CR>", { desc = "Reload configuration without restart nvim" })
+map(
+  "n",
+  "<leader>r",
+  ":source $MYVIMRC<CR>",
+  { desc = "Reload configuration without restart nvim" }
+)
 
 -- Comment
 map("n", "mm", "gcc", { desc = "Toggle comment", remap = true })
@@ -42,19 +47,44 @@ map("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 
 -- Telescope
 local builtin = require "telescope.builtin"
-map("n", "<leader>p", builtin.find_files, { desc = "Open Telescope to find files" })
-map("n", "<leader>f", builtin.live_grep, { desc = "Open Telescope to do live grep" })
+map(
+  "n",
+  "<leader>p",
+  builtin.find_files,
+  { desc = "Open Telescope to find files" }
+)
+map(
+  "n",
+  "<leader>f",
+  builtin.live_grep,
+  { desc = "Open Telescope to do live grep" }
+)
 
 -- NvimTree
-map("n", "<leader>n", ":NvimTreeToggle<CR>", { desc = "Toggle NvimTree sidebar" }) -- open/close
+map(
+  "n",
+  "<leader>n",
+  ":NvimTreeToggle<CR>",
+  { desc = "Toggle NvimTree sidebar" }
+) -- open/close
 
 -- Goto buffer in position...
 map("n", "<S-Tab>", "<Plug>(cokeline-focus-prev)", { silent = true })
 map("n", "<Tab>", "<Plug>(cokeline-focus-next)", { silent = true })
 
 for i = 1, 9 do
-  map("n", ("<Leader>%s"):format(i), ("<Plug>(cokeline-focus-%s)"):format(i), { silent = true })
+  map(
+    "n",
+    ("<Leader>%s"):format(i),
+    ("<Plug>(cokeline-focus-%s)"):format(i),
+    { silent = true }
+  )
 end
 
 -- Trouble
-map("n", "<leader>o", function() vim.cmd.Symbols() end, { desc = "Toggle Symbols" }) -- open/close
+map(
+  "n",
+  "<leader>o",
+  function() vim.cmd.Symbols() end,
+  { desc = "Toggle Symbols" }
+) -- open/close

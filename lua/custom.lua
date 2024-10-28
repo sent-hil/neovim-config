@@ -42,12 +42,12 @@ M.plugins = {
     "folke/trouble.nvim",
     opts = {
       win = {
-        type = 'split',
-        position = 'right'
-      }
+        type = "split",
+        position = "right",
+      },
     },
     cmd = "Trouble",
-  }
+  },
 }
 
 -- add extra configuration options here, like extra autocmds etc.

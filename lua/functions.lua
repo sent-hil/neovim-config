@@ -1,5 +1,9 @@
 -- Functions for easy access.
-vim.api.nvim_create_user_command("CodeAction", function(_) require("tiny-code-action").code_action() end, { nargs = 0 })
+vim.api.nvim_create_user_command(
+  "CodeAction",
+  function(_) require("tiny-code-action").code_action() end,
+  { nargs = 0 }
+)
 
 vim.api.nvim_create_user_command(
   "Diagnostics",
@@ -19,9 +23,17 @@ vim.api.nvim_create_user_command(
   { nargs = 0 }
 )
 
-vim.api.nvim_create_user_command("Lsp", function(_) vim.cmd "Trouble lsp focus=true" end, { nargs = 0 })
+vim.api.nvim_create_user_command(
+  "Lsp",
+  function(_) vim.cmd "Trouble lsp focus=true" end,
+  { nargs = 0 }
+)
 
-vim.api.nvim_create_user_command("OldFiles", function(_) vim.cmd "Telescope oldfiles" end, { nargs = 0 })
+vim.api.nvim_create_user_command(
+  "OldFiles",
+  function(_) vim.cmd "Telescope oldfiles" end,
+  { nargs = 0 }
+)
 
 vim.api.nvim_create_user_command(
   "OutgoingCalls",
@@ -29,4 +41,8 @@ vim.api.nvim_create_user_command(
   { nargs = 0 }
 )
 
-vim.api.nvim_create_user_command("Symbols", function(_) vim.cmd "Trouble symbols toggle focus=true" end, { nargs = 0 })
+vim.api.nvim_create_user_command(
+  "Symbols",
+  function(_) vim.cmd "Trouble symbols toggle focus=true" end,
+  { nargs = 0 }
+)

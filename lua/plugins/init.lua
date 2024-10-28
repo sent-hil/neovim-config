@@ -71,7 +71,14 @@ local builtin_plugins = {
   -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
   {
     "williamboman/mason.nvim",
-    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
+    cmd = {
+      "Mason",
+      "MasonInstall",
+      "MasonInstallAll",
+      "MasonUninstall",
+      "MasonUninstallAll",
+      "MasonLog",
+    },
     config = function() require "plugins.configs.mason" end,
   },
   {
@@ -160,7 +167,8 @@ local builtin_plugins = {
 }
 
 local exist, custom = pcall(require, "custom")
-local custom_plugins = exist and type(custom) == "table" and custom.plugins or {}
+local custom_plugins = exist and type(custom) == "table" and custom.plugins
+  or {}
 
 -- Check if there is any custom plugins
 -- local ok, custom_plugins = pcall(require, "plugins.custom")
@@ -212,7 +220,9 @@ require("lazy").setup {
 
 local aucmd = vim.api.nvim_create_autocmd
 
-local function augroup(name, fnc) fnc(vim.api.nvim_create_augroup(name, { clear = true })) end
+local function augroup(name, fnc)
+  fnc(vim.api.nvim_create_augroup(name, { clear = true }))
+end
 
 vim.api.nvim_create_autocmd("CursorMoved", {
   group = vim.api.nvim_create_augroup("auto-hlsearch", { clear = true }),
