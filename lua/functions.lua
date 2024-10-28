@@ -42,6 +42,18 @@ vim.api.nvim_create_user_command(
 )
 
 vim.api.nvim_create_user_command(
+  "TermFloat",
+  function(_) vim.cmd "ToggleTerm direction=float" end,
+  { nargs = 0 }
+)
+
+vim.api.nvim_create_user_command(
+  "TermVertical",
+  function(_) vim.cmd "ToggleTerm direction=vertical" end,
+  { nargs = 0 }
+)
+
+vim.api.nvim_create_user_command(
   "Symbols",
   function(_) vim.cmd "Trouble symbols toggle focus=true" end,
   { nargs = 0 }

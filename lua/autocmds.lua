@@ -16,27 +16,17 @@ local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 
 -- General settings
 
--- Highlight on yank
-autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank {
-      higroup = "IncSearch",
-      timeout = "1000",
-    }
-  end,
-})
-
 -- Remove whitespace on save
 autocmd("BufWritePre", {
   pattern = "",
   command = ":%s/\\s\\+$//e",
 })
 
--- Auto format on save using the attached (optionally filtered) language servere clients
--- https://neovim.io/doc/user/lsp.html#vim.lsp.buf.format()
+-- Auto format on save using the attached (optionally filtered) language server
+-- clients https://neovim.io/doc/user/lsp.html#vim.lsp.buf.format()
 autocmd("BufWritePre", {
   pattern = "",
-  command = ":silent lua vim.lsp.buf.format()",
+  command = ":silent Format",
 })
 
 -- Don"t auto commenting new lines
@@ -85,6 +75,7 @@ autocmd("Filetype", {
   callback = function() vim.opt_local.wrap = true end,
 })
 
+-- Expand current buffer path in nvim-tree
 local function auto_update_path()
   local buf = vim.api.nvim_get_current_buf()
   local bufname = vim.api.nvim_buf_get_name(buf)

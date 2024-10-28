@@ -22,9 +22,6 @@ M.plugins = {
     },
   },
   {
-    "justinmk/vim-sneak",
-  },
-  {
     "akinsho/toggleterm.nvim",
     version = "*",
     config = true,

@@ -147,7 +147,7 @@ local builtin_plugins = {
     event = "VeryLazy",
     config = function()
       require("which-key").setup {
-        delay = 1000, -- how long to wait before showing description
+        delay = 400, -- how long to wait before showing description
       }
     end,
   },
