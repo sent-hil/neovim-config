@@ -88,3 +88,38 @@ map(
   function() vim.cmd.Symbols() end,
   { desc = "Toggle Symbols" }
 ) -- open/close
+
+-- Navigate wildmenu, ie the menu that opens up when you do `:A<tab>` with
+-- arrow keys.
+vim.opt.wildcharm = ("<C-Z>"):byte()
+vim.keymap.set(
+  "c",
+  "<up>",
+  function() return vim.fn.wildmenumode() == 1 and "<left>" or "<up>" end,
+  { expr = true }
+)
+vim.keymap.set(
+  "c",
+  "<down>",
+  function() return vim.fn.wildmenumode() == 1 and "<right>" or "<down>" end,
+  { expr = true }
+)
+vim.keymap.set(
+  "c",
+  "<left>",
+  function() return vim.fn.wildmenumode() == 1 and "<up>" or "<left>" end,
+  { expr = true }
+)
+vim.keymap.set(
+  "c",
+  "<right>",
+  function() return vim.fn.wildmenumode() == 1 and " <bs><C-Z>" or "<right>" end,
+  { expr = true }
+)
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>sd",
+  [[<cmd>lua require('telescope.builtin').grep_string()<cr>]],
+  { silent = true, noremap = true }
+)
