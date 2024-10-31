@@ -85,3 +85,12 @@ local function auto_update_path()
 end
 
 autocmd("BufEnter", { callback = auto_update_path })
+
+-- Map `q` to close terminal when open. Any of the terminal toggle commands
+-- will work in place of :TermFloat
+autocmd("TermOpen", {
+  pattern = "term://*",
+  callback = function()
+    vim.keymap.set("n", "q", ":TermFloat<CR>", { buffer = true, silent = true })
+  end,
+})
