@@ -28,7 +28,6 @@ map("n", "<C-k>", "<C-w>k", { desc = "Move to bottom split" })
 -- Navigate softwrapped lines like regular lines
 map("n", "gj", "j")
 map("n", "j", "gj")
-map("n", "q", ":bd<cr>")
 
 -- Reload configuration without restart nvim
 map(
@@ -122,3 +121,14 @@ vim.keymap.set(
   function() return vim.fn.wildmenumode() == 1 and " <bs><C-Z>" or "<right>" end,
   { expr = true }
 )
+
+-- q closes each buffer 1 by one; when only 1 file is open, it closes nvim
+map("n", "q", ":bd<cr>")
+vim.keymap.set("n", "q", function()
+  -- Check if there’s only one buffer left
+  if #vim.fn.getbufinfo { buflisted = 1 } == 1 then
+    vim.cmd "q"
+  else
+    vim.cmd "bd"
+  end
+end, { silent = true })
