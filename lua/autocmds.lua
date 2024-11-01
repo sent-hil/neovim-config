@@ -50,12 +50,6 @@ autocmd("Filetype", {
   command = "setlocal shiftwidth=2 tabstop=2",
 })
 
--- Set colorcolumn
-autocmd("Filetype", {
-  pattern = { "python", "rst", "c", "cpp" },
-  command = "set colorcolumn=80",
-})
-
 autocmd("Filetype", {
   pattern = { "gitcommit", "markdown", "text" },
   callback = function()
@@ -94,3 +88,36 @@ autocmd("TermOpen", {
     vim.keymap.set("n", "q", ":TermFloat<CR>", { buffer = true, silent = true })
   end,
 })
+
+-- Show | at end of line if it is over 80 characters.
+local namespace = vim.api.nvim_create_namespace "wrap_limit"
+
+local function update_wrap_limit_indicator()
+  local buf = vim.api.nvim_get_current_buf()
+
+  -- Clear any existing extmarks in the namespace to prevent duplicates
+  vim.api.nvim_buf_clear_namespace(buf, namespace, 0, -1)
+
+  -- Loop through each line in the buffer and set the indicator if line length is 80 or more
+  for line = 0, vim.api.nvim_buf_line_count(buf) - 1 do
+    local line_text = vim.api.nvim_buf_get_lines(buf, line, line + 1, false)[1]
+      or ""
+    local text_length = #line_text
+
+    -- Only add the indicator if the line length is 80 or more
+    if text_length >= 80 then
+      vim.api.nvim_buf_set_extmark(buf, namespace, line, text_length, {
+        virt_text = { { "│", "NonText" } }, -- Only a single thin indicator line
+        virt_text_pos = "eol", -- End of line, no overlap with text
+        hl_mode = "combine",
+      })
+    end
+  end
+end
+vim.api.nvim_create_autocmd(
+  { "BufEnter", "TextChanged", "TextChangedI", "InsertLeave" },
+  {
+    pattern = "*",
+    callback = update_wrap_limit_indicator,
+  }
+)
